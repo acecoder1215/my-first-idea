@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>내 첫번째 아이디어 - 영감과 생각의 기록소</title>
+  <meta name="description" content="세상을 바꾸는 첫 걸음, 내 첫번째 아이디어를 기록하고 관리하는 아름답고 지적인 공간입니다.">
+  
+  <!-- Google Fonts for outfit and Noto Sans KR -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
+
+  <!-- Ambient Animated Background Blobs -->
+  <div class="bg-blob bg-blob-1" aria-hidden="true"></div>
+  <div class="bg-blob bg-blob-2" aria-hidden="true"></div>
+  <div class="bg-blob bg-blob-3" aria-hidden="true"></div>
+
+  <!-- Main Container -->
+  <main id="app-container">
+    <div class="card" id="main-card">
+      
+      <!-- Welcome View -->
+      <section id="welcome-view" class="view-content active">
+        <div class="badge">
+          <span class="badge-icon">✨</span>
+          <span class="badge-text">Inspiration Hub</span>
+        </div>
+        <h1>내 첫번째 아이디어</h1>
+        <p class="subtitle">
+          세상을 변화시킬 첫 번째 생각을 기록하고<br>아름답게 발전시켜 보세요.
+        </p>
+        <button id="btn-start" class="btn-primary">
+          시작하기
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </section>
+
+      <!-- App / Workspace View -->
+      <section id="app-view" class="view-content">
+        <header class="app-header">
+          <button id="btn-back" class="btn-icon" aria-label="메인 화면으로 돌아가기">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          <h2>아이디어 노트</h2>
+        </header>
+        
+        <form id="idea-form" class="idea-form">
+          <div class="input-wrapper">
+            <input type="text" id="idea-input" placeholder="새로운 아이디어를 입력하세요..." autocomplete="off" required>
+            <button type="submit" id="btn-submit" class="btn-submit" aria-label="아이디어 추가">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+
+        <div class="ideas-container">
+          <ul id="ideas-list" class="ideas-list">
+            <!-- JavaScript will populate items here -->
+          </ul>
+          <div id="empty-state" class="empty-state">
+            <p>아직 등록된 아이디어가 없습니다.<br>첫 번째 아이디어를 더해보세요!</p>
+          </div>
+        </div>
+      </section>
+      
+    </div>
+  </main>
+
+  <script src="script.js?v=2"></script>
+</body>
+</html>
