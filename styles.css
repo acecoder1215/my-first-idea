@@ -1,76 +1,85 @@
-/* Reset and custom variables */
+/* 1. 기본 여백 초기화 및 박스 사이징 선언 */
 *, *::before, *::after {
-  box-sizing: border-box;
+  box-sizing: border-box; /* 패딩과 테두리를 너비 계산에 포함시켜 레이아웃 깨짐 방지 */
   margin: 0;
   padding: 0;
 }
 
+/* 2. 전역 테마 및 스타일 변수 설정 정의 */
 :root {
-  --bg-color: #020308; /* Keep deep space black for beautiful contrast */
-  --card-bg: rgba(255, 255, 255, 0.88); /* Frosted bright white glass card (밝은 계통) */
-  --card-border: rgba(255, 255, 255, 0.6); /* Clear bright border */
-  --card-border-hover: rgba(255, 255, 255, 0.9);
-  --text-main: #0f172a; /* Dark slate for high readability (어두운 계통) */
+  --bg-color: #020308; /* 뒷배경용 우주 공간 느낌의 딥 블랙 */
+  --card-bg: rgba(255, 255, 255, 0.88); /* 밝은 계통: 반투명 우윳빛 유리 바탕 */
+  --card-border: rgba(56, 189, 248, 0.25); /* 빛을 반사하는 듯한 청록/하늘빛의 얇은 유리 테두리 */
+  --card-border-hover: rgba(56, 189, 248, 0.45); /* 호버 시 더 선명해지는 테두리 */
+  --text-main: #0f172a; /* 어두운 계통: 맑은 유리 카드 위에서 뛰어난 가독성을 내는 다크 슬레이트 텍스트 */
   --font-sans: 'Outfit', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --primary-gradient: linear-gradient(135deg, #ffedd5 0%, #f97316 100%); /* 기본값: 오렌지색 단추 그라데이션 */
 }
 
-/* Base Body Styles */
+/* 3. 전체 바디 스타일링 및 격자 패턴 레이아웃 */
 body {
-  min-height: 100dvh;
+  min-height: 100dvh; /* 모바일 브라우저 주소창 변화에 실시간 대응하는 100% 동적 뷰포트 높이 지정 */
   background-color: var(--bg-color);
   
-  /* Highly visible tech grid pattern to add visual density */
+  /* 격자 무늬(Tech Grid Pattern) 배경: 두 개의 투명한 선형 그라데이션을 겹쳐 격자 라인을 구현 */
   background-image: 
     linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-size: 28px 28px; /* 격자 한 칸의 가로세로 크기 */
   background-position: center;
   
   font-family: var(--font-sans);
   color: var(--text-main);
+  
+  /* 화면 정중앙에 카드를 위치시키기 위한 그리드 레이아웃 설정 */
   display: grid;
   place-items: center;
-  overflow: hidden;
+  overflow: hidden; /* 배경 광원이나 파티클이 화면 밖으로 넘쳤을 때 스크롤바가 생기지 않도록 차단 */
   position: relative;
-  scrollbar-gutter: stable;
-  -webkit-font-smoothing: antialiased;
+  scrollbar-gutter: stable; /* 스크롤바 생성 여부와 관계없이 레이아웃 위치 고정 */
+  -webkit-font-smoothing: antialiased; /* 글자 경계선을 부드럽게 처리하는 렌더링 옵션 */
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ambient Moving Background Blobs (Saturated & Brighter to shine through the light card) */
+/* 4. 애니메이션 배경 광원 (VIBRANT BACKGROUND BLOBS) */
+/* 뒷배경에서 몽환적으로 은은하게 빛나는 색상 구체들의 공통 속성 */
 .bg-blob {
   position: absolute;
-  width: min(80vw, 600px);
+  width: min(80vw, 600px); /* 화면 폭의 80% 혹은 최대 600px 크기 */
   height: min(80vw, 600px);
   border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.7; /* Higher opacity to illuminate the frosted glass card */
+  filter: blur(90px); /* 90px 블러 처리를 하여 경계를 뭉개고 부드러운 네온 빛으로 형성 */
+  opacity: 0.7; /* 우윳빛 카드를 은은하게 뚫고 나오도록 높게 설정된 불투명도 */
   z-index: 0;
-  pointer-events: none;
+  pointer-events: none; /* 광원이 마우스 클릭이나 이벤트를 가로채지 못하도록 무력화 */
 }
 
+/* 광원 1: 파란색 빛 (좌상단에서 우하단으로 유영) */
 .bg-blob-1 {
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.85) 0%, transparent 70%); /* Royal Blue */
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.85) 0%, transparent 70%);
   top: 10%;
   left: 15%;
   animation: float-blob-1 25s ease-in-out infinite alternate;
 }
 
+/* 광원 2: 하늘색 빛 (우하단에서 좌상단으로 유영) */
 .bg-blob-2 {
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.8) 0%, transparent 70%); /* Electric Cyan */
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.8) 0%, transparent 70%);
   bottom: 10%;
   right: 15%;
   animation: float-blob-2 28s ease-in-out infinite alternate-reverse;
 }
 
+/* 광원 3: 보라색 빛 (중앙 부근에서 팽창/수축하며 밸런스 유지) */
 .bg-blob-3 {
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.75) 0%, transparent 70%); /* Deep Violet */
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.75) 0%, transparent 70%);
   top: 45%;
   left: 45%;
   transform: translate(-50%, -50%);
   animation: float-blob-3 32s ease-in-out infinite alternate;
 }
 
+/* 배경 광원들 각자의 유영 애니메이션 정의 */
 @keyframes float-blob-1 {
   0% { transform: translate(0, 0) scale(1); }
   100% { transform: translate(120px, 60px) scale(1.2); }
@@ -86,40 +95,45 @@ body {
   100% { transform: translate(-35%, -35%) scale(1.15); }
 }
 
-/* Main Layout Wrapper */
+/* 5. 메인 레이아웃 래퍼 */
 #app-container {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  z-index: 1;
+  z-index: 1; /* 격자 무늬 배경과 광원들 위쪽으로 오도록 배치 */
 }
 
-/* Bright Frosted Glass Card (박스 안 밝은 계통) */
+/* 6. 중앙 글래스모피즘 카드 박스 */
 .card {
   position: relative;
   background: var(--card-bg);
+  
+  /* 글래스모피즘의 핵심: 뒷배경을 블러 처리하고 포화도(saturate)를 증폭시켜 투명 유리 효과 극대화 */
   backdrop-filter: blur(32px) saturate(180%);
   -webkit-backdrop-filter: blur(32px) saturate(180%);
   border: 1px solid var(--card-border);
   border-radius: 28px;
-  padding: 5rem 4rem;
+  padding: 4.5rem 3.5rem; /* 문장과 버튼이 들어가는 쾌적한 안쪽 여백 */
   width: 90%;
-  max-width: 520px;
+  max-width: 520px; /* 문장이 한 줄로 나오기에 적당하게 설계된 최대 가로폭 */
   text-align: center;
-  transform-style: preserve-3d;
-  will-change: transform;
   
-  /* Vertical Flexbox alignment for H1 and Button */
+  /* 마우스 3D 입체 효과 구현을 위한 3D 변환 공간 설정 */
+  transform-style: preserve-3d;
+  will-change: transform; /* 브라우저에게 변환 예정임을 알려 렌더링 성능 최적화 */
+  
+  /* 정렬 방식: 세로 정렬 및 내부 간격 */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.5rem; /* Gap between sentence and button */
+  gap: 2.5rem; /* 문장과 버튼 사이의 간격 */
   
-  /* Glow breathing animation for light glass card shadow */
+  /* 광원 숨쉬기 애니메이션 적용: 그림자 크기가 호흡하듯 변화 */
   animation: light-glow-breath 5s ease-in-out infinite alternate;
   
+  /* 테두리색 및 3D 회전 복귀 시 부드러운 전환 속도 정의 */
   transition: 
     border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -129,13 +143,13 @@ body {
   border-color: var(--card-border-hover);
 }
 
-/* Light Card Glow Breathing Animation */
+/* 카드 박스의 맥동(숨쉬기) 그림자 효과 선언 */
 @keyframes light-glow-breath {
   0% {
     box-shadow: 
-      0 30px 60px rgba(0, 0, 0, 0.35),
-      0 0 30px rgba(255, 255, 255, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      0 30px 60px rgba(0, 0, 0, 0.35), /* 기본 바닥 그림자 */
+      0 0 30px rgba(255, 255, 255, 0.15), /* 부드러운 주변 백색 안개광 */
+      inset 0 1px 0 rgba(255, 255, 255, 0.6); /* 카드 상단의 얇은 입체 하이라이트 선 */
   }
   100% {
     box-shadow: 
@@ -145,49 +159,52 @@ body {
   }
 }
 
-/* Header Text (어두운 계통 - Pure Dark Slate) */
+/* 7. 메인 힐링 문장 텍스트 설정 (어두운 계통 & 고정 40px) */
 h1 {
-  font-size: 40px; /* Fixed font size */
+  font-size: 40px; /* 요청하신 40px 고정 크기 */
   font-weight: 800;
-  color: var(--text-main); /* Dark Slate color */
-  letter-spacing: -0.02em;
+  color: var(--text-main); /* 가독성이 뛰어난 다크 슬레이트 솔리드 컬러 */
+  letter-spacing: -0.02em; /* 한국어 가독성에 최적화된 자간 조절 */
   line-height: 1.25;
   display: inline-block;
-  white-space: nowrap; /* Forces text to stay on a single line */
-  will-change: opacity, transform;
+  white-space: nowrap; /* 화면이 작아지더라도 절대 줄바꿈이 일어나지 않도록 강제 방지 */
+  will-change: opacity, transform; /* 자바스크립트 문장 페이드 전환 시 렉 방지 */
   
-  /* Subtle dark shadow for crisp readability on bright bg */
+  /* 밝은 배경에서 글자가 또렷해 보이도록 주는 얇고 고운 그림자 효과 */
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* Eye-Catching Button Style (Defaulted to orange state, text color is dark) */
+/* 8. 눈에 잘 띄는 입체 그라데이션 버튼 정의 */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
+  gap: 0.75rem; /* 버튼 내 텍스트와 화살표 간의 간격 */
   width: 100%;
-  max-width: 220px; /* Perfectly sized button */
+  max-width: 220px; /* 버튼의 적절한 가로폭 제한 */
   padding: 1rem 1.75rem;
-  background: linear-gradient(135deg, #ffedd5 0%, #f97316 100%); /* Default Orange */
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--primary-gradient); /* 자바스크립트로 동적 교체되는 배경색 변수 */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* 경계 구분을 위한 미세한 테두리 */
   border-radius: 14px;
-  color: #0f172a; /* Dark text for contrast on bright button (어두운 계통) */
+  color: #0f172a; /* 버튼 배경이 밝기 때문에 조화를 이루는 어두운 계통 글자색 적용 */
   font-size: 1rem;
   font-weight: 700;
   font-family: inherit;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.35);
+  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.35); /* 테마색에 맞춰 맥동하는 그림자 */
+  
+  /* 마우스 호버 및 자바스크립트 색상 교체 시 자연스럽도록 설정된 트랜지션 효과 */
   transition: 
     transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
     background 0.4s ease,
     color 0.4s ease;
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* 버튼 내부 플래시 광선이 영역 밖으로 튀어나가지 않도록 조절 */
   z-index: 2;
 }
 
+/* 버튼 위에 나타나는 스위핑 플래시(반사광) 장식 선 효과 */
 .btn-primary::before {
   content: '';
   position: absolute;
@@ -199,33 +216,38 @@ h1 {
   transition: 0.6s;
 }
 
+/* 호버 시 플래시 반사광이 좌에서 우로 빠르게 스쳐 지나가는 동적 효과 구현 */
 .btn-primary:hover::before {
   left: 100%;
 }
 
+/* 호버 시 살짝 떠오르는 모션 */
 .btn-primary:hover {
   transform: translateY(-2px);
 }
 
+/* 클릭(눌렀을 때) 살짝 가라앉는 반응형 모션 */
 .btn-primary:active {
   transform: translateY(1px);
 }
 
+/* 버튼 우측 내부 화살표 아이콘 및 어두운 색 연동 */
 .arrow-icon {
   width: 18px;
   height: 18px;
-  stroke: #0f172a; /* Dark stroke matching the text */
+  stroke: #0f172a; /* 글씨색에 맞춘 어두운 계통의 선 */
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* 버튼에 호버 시 화살표가 우측으로 4px 미끄러지는 마이크로 인터랙션 */
 .btn-primary:hover .arrow-icon {
   transform: translateX(4px);
 }
 
-/* Custom Interactive Particles */
+/* 9. 자바스크립트로 동적 생성되는 파티클 입자 공통 스타일 */
 .particle {
   position: absolute;
   border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
+  pointer-events: none; /* 사용자의 추가 클릭을 방해하지 않음 */
+  z-index: 9999; /* 화면 최상단에 흩뿌려지도록 높은 레이어 순서 지정 */
 }

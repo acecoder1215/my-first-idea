@@ -3,36 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO 최적화: 브라우저 상단 탭에 노출될 타이틀 및 검색엔진용 메타 설명 설정 -->
   <title>오늘도 힘내세요!</title>
   <meta name="description" content="격려와 긍정의 메시지를 전하는 공간입니다.">
   
-  <!-- Google Fonts for Outfit and Noto Sans KR -->
+  <!-- 외부 폰트 연동: Google Fonts에서 영문 전용 Outfit 폰트와 한글 Noto Sans KR 폰트 불러오기 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@800&family=Noto+Sans+KR:wght@800&display=swap" rel="stylesheet">
   
+  <!-- 스타일시트 연동: '?v=9' 파라미터를 추가하여 브라우저 캐시를 방지하고 새 코드 수정을 즉시 반영 (Cache Busting) -->
   <link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
 
-  <!-- Ambient Animated Background Blobs -->
+  <!-- 뒷배경을 화사하게 빛내는 3개의 서서히 움직이는 몽환적인 그라데이션 구체들 (스크린 리더가 읽지 않도록 aria-hidden 설정) -->
   <div class="bg-blob bg-blob-1" aria-hidden="true"></div>
   <div class="bg-blob bg-blob-2" aria-hidden="true"></div>
   <div class="bg-blob bg-blob-3" aria-hidden="true"></div>
 
-  <!-- Main Container -->
+  <!-- 화면 중앙 정렬 및 배치를 위한 메인 컨테이너 영역 -->
   <main id="app-container">
+    
+    <!-- 글래스모피즘(반투명 유리판)과 3D 입체 기울기 효과가 결합된 핵심 카드 박스 -->
     <div class="card" id="main-card">
+      <!-- 텍스트 영역: 어두운 슬레이트 색상과 40px 크기로 가독성이 극대화된 힐링 문구 -->
       <h1 id="main-sentence">오늘도 힘내세요!</h1>
+      
+      <!-- 다음 문장으로 텍스트를 전환하고, 버튼의 테마색 및 파티클을 변경해 주는 단추 -->
       <button id="btn-next" class="btn-primary">
         다음 문장보기
+        <!-- 버튼 우측의 디자인용 화살표 SVG 아이콘 -->
         <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
       </button>
     </div>
+    
   </main>
 
+  <!-- 자바스크립트 연동: 동적 텍스트 교체, 3D 마우스 트래킹 및 파티클 애니메이션 로직 -->
   <script src="script.js?v=9"></script>
 </body>
 </html>
