@@ -6,11 +6,11 @@
 }
 
 :root {
-  --bg-color: #030408; /* Darker space black for higher contrast */
-  --card-bg: rgba(8, 12, 28, 0.55); /* Darker semi-transparent blue tint */
-  --card-border: rgba(255, 255, 255, 0.12); /* Brighter glass border */
-  --card-border-hover: rgba(255, 255, 255, 0.25);
-  --text-main: #f3f4f6;
+  --bg-color: #020308; /* Ultra deep space black */
+  --card-bg: rgba(6, 10, 24, 0.6); /* Translucent dark blue-gray */
+  --card-border: rgba(56, 189, 248, 0.25); /* Cyan-blue tint glass border to reflect light */
+  --card-border-hover: rgba(56, 189, 248, 0.45);
+  --text-main: #ffffff;
   --font-sans: 'Outfit', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -19,11 +19,11 @@ body {
   min-height: 100dvh;
   background-color: var(--bg-color);
   
-  /* Modern High-End Grid Pattern to match the mockup */
+  /* 1. Highly visible tech grid pattern to add visual density */
   background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-  background-size: 24px 24px;
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
   background-position: center;
   
   font-family: var(--font-sans);
@@ -37,53 +37,53 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ambient Moving Background Blobs (Saturated & Brighter to match mockup) */
+/* Ambient Moving Background Blobs (Shifted closer to center for overlap behind the card) */
 .bg-blob {
   position: absolute;
-  width: min(85vw, 700px);
-  height: min(85vw, 700px);
+  width: min(80vw, 600px);
+  height: min(80vw, 600px);
   border-radius: 50%;
-  filter: blur(110px); /* Slightly sharper blur for more concentrated glowing effect */
-  opacity: 0.6; /* Increased opacity from 0.25 to 0.6 for rich colors */
+  filter: blur(80px); /* Slightly sharper blur for richer, concentrated neon cores */
+  opacity: 0.65; /* Saturated, visible glows */
   z-index: 0;
   pointer-events: none;
 }
 
 .bg-blob-1 {
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.85) 0%, transparent 70%); /* Deep Blue */
-  top: -10%;
-  left: -10%;
-  animation: float-blob-1 25s ease-in-out infinite alternate;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.9) 0%, transparent 70%); /* Royal Blue */
+  top: 10%;
+  left: 15%;
+  animation: float-blob-1 20s ease-in-out infinite alternate;
 }
 
 .bg-blob-2 {
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.8) 0%, transparent 70%); /* Bright Cyan */
-  bottom: -10%;
-  right: -10%;
-  animation: float-blob-2 28s ease-in-out infinite alternate-reverse;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.85) 0%, transparent 70%); /* Electric Cyan */
+  bottom: 10%;
+  right: 15%;
+  animation: float-blob-2 24s ease-in-out infinite alternate-reverse;
 }
 
 .bg-blob-3 {
-  background: radial-gradient(circle, rgba(13, 148, 136, 0.75) 0%, transparent 70%); /* Teal */
-  top: 40%;
-  left: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.7) 0%, transparent 70%); /* Deep Violet for color depth */
+  top: 45%;
+  left: 45%;
   transform: translate(-50%, -50%);
-  animation: float-blob-3 32s ease-in-out infinite alternate;
+  animation: float-blob-3 28s ease-in-out infinite alternate;
 }
 
 @keyframes float-blob-1 {
   0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(180px, 100px) scale(1.3); }
+  100% { transform: translate(120px, 60px) scale(1.2); }
 }
 
 @keyframes float-blob-2 {
   0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(-180px, -100px) scale(1.3); }
+  100% { transform: translate(-120px, -60px) scale(1.2); }
 }
 
 @keyframes float-blob-3 {
   0% { transform: translate(-50%, -50%) scale(0.9); }
-  100% { transform: translate(-20%, -20%) scale(1.25); }
+  100% { transform: translate(-35%, -35%) scale(1.15); }
 }
 
 /* Main Layout Wrapper */
@@ -96,7 +96,7 @@ body {
   z-index: 1;
 }
 
-/* Card Container with Glassmorphism & Permanent Glow Aura */
+/* Card Container with Glassmorphism, 3D Tilt support, and Glowing Breath effect */
 .card {
   position: relative;
   background: var(--card-bg);
@@ -104,45 +104,69 @@ body {
   -webkit-backdrop-filter: blur(32px) saturate(180%);
   border: 1px solid var(--card-border);
   border-radius: 28px;
-  padding: 5rem 4rem; /* Generous padding to create premium card height */
+  padding: 5.5rem 4rem; /* Cozy vertical space */
   width: 90%;
-  max-width: 520px; /* Perfectly sized for single line text */
+  max-width: 520px;
   text-align: center;
-  box-shadow: 
-    0 30px 60px rgba(0, 0, 0, 0.65),
-    0 0 45px rgba(37, 99, 235, 0.15), /* Permanent subtle blue outer glow */
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
   transform-style: preserve-3d;
   will-change: transform;
+  
+  /* Glow breathing animation handles shadow dynamically */
+  animation: glow-breath 5s ease-in-out infinite alternate;
+  
   transition: 
     border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card:hover {
   border-color: var(--card-border-hover);
-  box-shadow: 
-    0 45px 90px rgba(0, 0, 0, 0.75),
-    0 0 70px rgba(37, 99, 235, 0.38), /* Enhanced neon hover glow */
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
-/* Header Text (LARGER & NEON GLOW GRADIENT) */
+/* Glow Breathing Animation */
+@keyframes glow-breath {
+  0% {
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.7),
+      0 0 35px rgba(37, 99, 235, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  }
+  100% {
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.7),
+      0 0 55px rgba(37, 99, 235, 0.32),
+      0 0 80px rgba(6, 182, 212, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  }
+}
+
+/* Header Text (VIBRANT GRADIENT & PULSING NEON GLOW) */
 h1 {
-  font-size: clamp(1.8rem, 6vw, 2.9rem);
+  font-size: clamp(1.8rem, 6vw, 3rem);
   font-weight: 800;
-  background: linear-gradient(135deg, #ffffff 20%, #93c5fd 65%, #3b82f6 100%); /* White-to-Blue gradient */
+  background: linear-gradient(135deg, #ffffff 15%, #60a5fa 55%, #2563eb 100%); /* High contrast gradient */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   letter-spacing: -0.02em;
   line-height: 1.25;
-  
-  /* Vivid text shadow to match mockup neon glow */
-  text-shadow: 
-    0 0 15px rgba(59, 130, 246, 0.55),
-    0 0 30px rgba(59, 130, 246, 0.25);
   display: inline-block;
   white-space: nowrap; /* Forces text to stay on a single line */
+  
+  /* Pulsing neon text glow */
+  animation: neon-pulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes neon-pulse {
+  0% {
+    text-shadow: 
+      0 0 10px rgba(37, 99, 235, 0.45),
+      0 0 20px rgba(37, 99, 235, 0.2);
+  }
+  100% {
+    text-shadow: 
+      0 0 18px rgba(37, 99, 235, 0.75),
+      0 0 35px rgba(37, 99, 235, 0.4),
+      0 0 50px rgba(6, 182, 212, 0.3);
+  }
 }
