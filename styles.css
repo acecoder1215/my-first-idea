@@ -12,6 +12,7 @@
   --card-border-hover: rgba(56, 189, 248, 0.45);
   --text-main: #ffffff;
   --font-sans: 'Outfit', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --primary-gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); /* Vibrant blue gradient */
 }
 
 /* Base Body Styles */
@@ -19,7 +20,7 @@ body {
   min-height: 100dvh;
   background-color: var(--bg-color);
   
-  /* 1. Highly visible tech grid pattern to add visual density */
+  /* Highly visible tech grid pattern to add visual density */
   background-image: 
     linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
@@ -53,14 +54,14 @@ body {
   background: radial-gradient(circle, rgba(37, 99, 235, 0.9) 0%, transparent 70%); /* Royal Blue */
   top: 10%;
   left: 15%;
-  animation: float-blob-1 20s ease-in-out infinite alternate;
+  animation: float-blob-1 25s ease-in-out infinite alternate;
 }
 
 .bg-blob-2 {
   background: radial-gradient(circle, rgba(6, 182, 212, 0.85) 0%, transparent 70%); /* Electric Cyan */
   bottom: 10%;
   right: 15%;
-  animation: float-blob-2 24s ease-in-out infinite alternate-reverse;
+  animation: float-blob-2 28s ease-in-out infinite alternate-reverse;
 }
 
 .bg-blob-3 {
@@ -68,7 +69,7 @@ body {
   top: 45%;
   left: 45%;
   transform: translate(-50%, -50%);
-  animation: float-blob-3 28s ease-in-out infinite alternate;
+  animation: float-blob-3 32s ease-in-out infinite alternate;
 }
 
 @keyframes float-blob-1 {
@@ -104,12 +105,18 @@ body {
   -webkit-backdrop-filter: blur(32px) saturate(180%);
   border: 1px solid var(--card-border);
   border-radius: 28px;
-  padding: 5.5rem 4rem; /* Cozy vertical space */
+  padding: 4.5rem 3.5rem;
   width: 90%;
   max-width: 520px;
   text-align: center;
   transform-style: preserve-3d;
   will-change: transform;
+  
+  /* Vertical Flexbox alignment for H1 and Button */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem; /* Gap between sentence and button */
   
   /* Glow breathing animation handles shadow dynamically */
   animation: glow-breath 5s ease-in-out infinite alternate;
@@ -140,15 +147,16 @@ body {
   }
 }
 
-/* Header Text (VIBRANT GRADIENT & PULSING NEON GLOW) */
+/* Header Text (PURE WHITE & PULSING NEON GLOW) */
 h1 {
-  font-size: 40px; /* Fixed font size */
+  font-size: 40px; /* Fixed font size as requested */
   font-weight: 800;
   color: #ffffff; /* Pure white tone */
   letter-spacing: -0.02em;
   line-height: 1.25;
   display: inline-block;
   white-space: nowrap; /* Forces text to stay on a single line */
+  will-change: opacity, transform;
   
   /* Pulsing neon text glow */
   animation: neon-pulse 3s ease-in-out infinite alternate;
@@ -166,4 +174,71 @@ h1 {
       0 0 35px rgba(37, 99, 235, 0.4),
       0 0 50px rgba(6, 182, 212, 0.3);
   }
+}
+
+/* Eye-Catching Blue Button Style */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 220px; /* Perfectly sized button */
+  padding: 1rem 1.75rem;
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: 0.6s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.6);
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.arrow-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+/* Custom Interactive Particles */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
 }
