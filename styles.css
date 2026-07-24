@@ -96,9 +96,9 @@ body {
   -webkit-backdrop-filter: blur(28px) saturate(170%);
   border: 1px solid var(--card-border);
   border-radius: 28px;
-  padding: 4rem 3.5rem; /* Cozy padding around single heading */
+  padding: 3rem 2.5rem; /* Reduced padding to give text more breathing room */
   width: 90%;
-  max-width: 500px;
+  max-width: 580px; /* Increased max-width to comfortably fit the text on one line */
   text-align: center;
   box-shadow: 
     0 30px 60px rgba(0, 0, 0, 0.45),
@@ -121,14 +121,15 @@ body {
 
 /* Header Text (LARGER & BLUE-GRADIENT) */
 h1 {
-  font-size: clamp(2.4rem, 8vw, 3.4rem);
+  font-size: clamp(1.6rem, 5.5vw, 2.8rem); /* Optimized font scaling for better fit */
   font-weight: 800;
   background: linear-gradient(135deg, #ffffff 10%, #93c5fd 55%, #2563eb 100%); /* White-to-Blue gradient */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
   text-shadow: 0 2px 25px rgba(37, 99, 235, 0.2);
   display: inline-block;
+  white-space: nowrap; /* Forces the text to stay on a single line */
 }
