@@ -13,19 +13,56 @@ document.addEventListener('DOMContentLoaded', () => {
     "오늘 하루도 수고 많았어요."
   ];
 
-  let currentIdx = 0;
+  // Button Color Themes (Orange, Yellow, Green, Blue)
+  const buttonThemes = [
+    {
+      name: 'orange',
+      bg: 'linear-gradient(135deg, #ffedd5 0%, #f97316 100%)',
+      shadow: '0 8px 24px rgba(249, 115, 22, 0.35)',
+      particles: ['#ea580c', '#f97316', '#fdba74', '#ffedd5']
+    },
+    {
+      name: 'yellow',
+      bg: 'linear-gradient(135deg, #fef9c3 0%, #ca8a04 100%)',
+      shadow: '0 8px 24px rgba(202, 138, 4, 0.35)',
+      particles: ['#ca8a04', '#eab308', '#fde047', '#fef9c3']
+    },
+    {
+      name: 'green',
+      bg: 'linear-gradient(135deg, #dcfce7 0%, #16a34a 100%)',
+      shadow: '0 8px 24px rgba(22, 163, 74, 0.35)',
+      particles: ['#16a34a', '#22c55e', '#86efac', '#dcfce7']
+    },
+    {
+      name: 'blue',
+      bg: 'linear-gradient(135deg, #dbeafe 0%, #2563eb 100%)',
+      shadow: '0 8px 24px rgba(37, 99, 235, 0.35)',
+      particles: ['#2563eb', '#3b82f6', '#93c5fd', '#dbeafe']
+    }
+  ];
 
-  // 1. Button Click Handlers (Text rotation + Particle splash)
+  let currentIdx = 0;
+  let themeIdx = 0; // Starts with orange (index 0)
+
+  // 1. Button Click Handlers (Text rotation + Button theme cycling + Particle splash)
   btnNext.addEventListener('click', (e) => {
-    // Spawn blue neon particles at the cursor click location
-    createParticles(e.clientX, e.clientY);
+    // Cycle the button theme color
+    themeIdx = (themeIdx + 1) % buttonThemes.length;
+    const currentTheme = buttonThemes[themeIdx];
     
-    // Apply soft fade-out and scale transition to text
+    // Spawn color-coordinated particles matching the new theme
+    createParticles(e.clientX, e.clientY, currentTheme.particles);
+
+    // Apply the new theme style to the button dynamically
+    btnNext.style.background = currentTheme.bg;
+    btnNext.style.boxShadow = currentTheme.shadow;
+    
+    // Soft text fade-out transition
     h1.style.opacity = '0';
     h1.style.transform = 'scale(0.95)';
     h1.style.transition = 'opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
     
-    // Wait for fade-out, update text, then fade-in
+    // Update text content and fade-in
     setTimeout(() => {
       currentIdx = (currentIdx + 1) % sentences.length;
       h1.textContent = sentences[currentIdx];
@@ -60,10 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
   });
 
-  // 3. Blue Particle Splash Generator
-  function createParticles(x, y) {
+  // 3. Dynamic Particle Splash Generator
+  function createParticles(x, y, activeColors) {
     const particleCount = 14;
-    const colors = ['#2563eb', '#3b82f6', '#06b6d4', '#60a5fa', '#2dd4bf']; // Deep blues, cyans, and teals
     
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement('div');
@@ -73,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const size = Math.random() * 5 + 4; // 4px to 9px
       particle.style.width = `${size}px`;
       particle.style.height = `${size}px`;
-      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+      particle.style.background = activeColors[Math.floor(Math.random() * activeColors.length)];
       
       // Position at mouse click point
       particle.style.left = `${x}px`;
